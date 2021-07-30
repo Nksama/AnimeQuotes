@@ -1,4 +1,4 @@
-module meme.go
+module github.com/Nksama/AnimeQuotes
 
 go 1.16
 
