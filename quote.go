@@ -13,13 +13,13 @@ import (
 )
 
 type Qt struct {
-	Quote     string
-	Character string
+	Content string
+	//	Character string
 }
 
 func main() {
-
-	b, err := gotgbot.NewBot(os.Getenv("TOKEN"), &gotgbot.BotOpts{
+	token := os.Getenv("TOKEN")
+	b, err := gotgbot.NewBot(token, &gotgbot.BotOpts{
 		Client:      http.Client{},
 		GetTimeout:  gotgbot.DefaultGetTimeout,
 		PostTimeout: gotgbot.DefaultPostTimeout,
@@ -33,6 +33,7 @@ func main() {
 
 	dispatcher.AddHandler(handlers.NewCommand("quote", quotex))
 	dispatcher.AddHandler(handlers.NewCommand("start", start))
+	dispatcher.AddHandler(handlers.NewCommand("repo", repo))
 
 	err = updater.StartPolling(b, &ext.PollingOpts{DropPendingUpdates: true})
 	if err != nil {
@@ -44,7 +45,7 @@ func main() {
 }
 
 func quotex(b *gotgbot.Bot, ctx *ext.Context) error {
-	resp, err := http.Get("https://animechan.vercel.app/api/random")
+	resp, err := http.Get("https://api.quotable.io/random")
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -52,7 +53,7 @@ func quotex(b *gotgbot.Bot, ctx *ext.Context) error {
 	var quote Qt
 	json.Unmarshal([]byte(data), &quote)
 
-	_, errr := ctx.EffectiveMessage.Reply(b, fmt.Sprintf("<b>%v</b>\n - %v", quote.Quote, quote.Character), &gotgbot.SendMessageOpts{
+	_, errr := ctx.EffectiveMessage.Reply(b, fmt.Sprintf("<b>%v</b>", quote.Content), &gotgbot.SendMessageOpts{
 		ParseMode: "html",
 	})
 
@@ -73,3 +74,15 @@ func start(b *gotgbot.Bot, ctx *ext.Context) error {
 
 	return nil
 }
+
+func repo(b *gotgbot.Bot, ctx *ext.Context) error {
+	_, err := ctx.EffectiveMessage.Reply(b, fmt.Sprintf("https://github.com/Nksama/AnimeQuotes"), &gotgbot.SendMessageOpts{
+		ParseMode: "html",
+	})
+
+	if err != nil {
+		panic(err)
+	}
+	return nil
+}
+
