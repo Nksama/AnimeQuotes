@@ -19,13 +19,9 @@ jobs:
         
       - name: Run build
         run: go build . 
-      
-      - name: Run vet & lint
+    
+      - name: Running
+        timeout-minutes: 350
+        continue-on-error: true
         run: |
-          go vet .
-          golint .
-       - name: Running
-          timeout-minutes: 350
-          continue-on-error: true
-          run: |
-            go run main.go
+          go run main.go
