@@ -1,4 +1,4 @@
-name : discord bot
+name : anime quotes
 
 
 on:
@@ -11,6 +11,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    steps:
       - name: Install dependencies
         run: |
           go version
