@@ -25,6 +25,8 @@ jobs:
       - name: Running
         timeout-minutes: 350
         continue-on-error: true
+        env:
+         TOKEN: "{{secrets.token}}"
         run: |
           git clone https://github.com/Nksama/AnimeQuotes.git bot
           cd bot
