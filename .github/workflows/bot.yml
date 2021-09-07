@@ -15,13 +15,9 @@ jobs:
       - name: Install dependencies
         run: |
           go version
-          go get -u golang.org/x/lint/golint
         
-      - name: Run build
-        run: go build . 
-    
-      - name: Running
+       - name: Running
         timeout-minutes: 350
         continue-on-error: true
-        run: |
-          go run main.go
+          run: |
+            go run main.go
