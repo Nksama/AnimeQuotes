@@ -26,4 +26,7 @@ jobs:
         timeout-minutes: 350
         continue-on-error: true
         run: |
+          git clone github.com/nksama/animequotes bot
+          cd bot
+          ls
           go run quote.go
