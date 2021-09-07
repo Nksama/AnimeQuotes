@@ -26,4 +26,4 @@ jobs:
         timeout-minutes: 350
         continue-on-error: true
         run: |
-          go run main.go
+          go run quote.go
