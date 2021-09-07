@@ -16,8 +16,8 @@ jobs:
         run: |
           go version
         
-       - name: Running
+      - name: Running
         timeout-minutes: 350
         continue-on-error: true
-          run: |
-            go run main.go
+        run: |
+          go run main.go
